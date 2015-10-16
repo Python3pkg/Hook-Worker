@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='hook_worker',
     version='0.0.1',
-    packages=[''],
+    py_modules=['hook_worker_app.py', 'hook_worker_redis.py', 'hook_worker_cmd'],
     url='https://github.com/Capitains/Hook-Worker',
     license='GNU GPL',
     author='Thibault Clerice',
