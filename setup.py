@@ -1,12 +1,23 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='hook_worker',
+    name='HookWorker',
     version='0.0.1',
-    py_modules=['hook_worker_app.py', 'hook_worker_redis.py', 'hook_worker_cmd'],
+    packages=find_packages(exclude=("./tests")),
     url='https://github.com/Capitains/Hook-Worker',
     license='GNU GPL',
     author='Thibault Clerice',
     author_email='leponteineptique@gmail.com',
-    description='Lightweight API to handle call and distribute them over a redis server'
+    description='Lightweight API to handle call and distribute them over a redis server',
+    install_requires=[
+        "HookTest==0.0.2",
+        "Flask==0.10.1",
+        "rq==0.5.5",
+        "redis>=2.7.0",
+        "HookTest==0.0.2",
+        "tornado==4.2.1"
+    ],
+    entry_points={
+        'console_scripts': ['hookworker-api=HookWorker.cmd:cmd'],
+    }
 )

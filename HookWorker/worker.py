@@ -7,15 +7,16 @@ from sys import argv
 # Preload libraries
 import HookTest.test
 
-def worker(redis_url=None):
+def worker(redis_url="localhost:6379"):
     """ Run a work for python-rq
 
     :param redis_url: Redis URI (redis://SOMETHING)
     :type redis_url:None
     :return: Nothing
     """
-    redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+    redis_url = "redis://{0}".format(redis_url)
     conn = redis.from_url(redis_url)
+
     with Connection(conn):
         qs = [Queue()]
 
@@ -24,4 +25,4 @@ def worker(redis_url=None):
 
 
 if __name__ == "__main__":
-    worker(redis_url=argv[1])
+    worker()
