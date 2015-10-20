@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='HookWorker',
     version='0.0.1',
-    packages=find_packages(exclude=("./tests")),
+    packages=find_packages(exclude=("./tests", "__pycache__")),
     url='https://github.com/Capitains/Hook-Worker',
     license='GNU GPL',
     author='Thibault Clerice',
@@ -14,7 +14,6 @@ setup(
         "Flask==0.10.1",
         "rq==0.5.5",
         "redis>=2.7.0",
-        "HookTest==0.0.2",
         "tornado==4.2.1"
     ],
     entry_points={

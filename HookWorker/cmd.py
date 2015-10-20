@@ -12,7 +12,6 @@ def cmd():
     )
 
     parser.add_argument("-p", "--port", help="Port to use to run the API", default=None, type=int)
-    parser.add_argument("-d", "--domain", help="Host for the API", default=None)
     parser.add_argument("-g", "--debug", help="Debug mode for the API", action="store_true")
     parser.add_argument('-s', "--secret", help='Secret used to secure data exchanges in Hook', default="")
     parser.add_argument('-a', "--api", help='Prevent the api from running', action="store_true")

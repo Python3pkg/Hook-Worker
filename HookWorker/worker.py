@@ -2,7 +2,6 @@
 import os
 from rq import Queue, Connection, Worker
 import redis
-from sys import argv
 
 # Preload libraries
 import HookTest.test
@@ -10,7 +9,7 @@ import HookTest.test
 def worker(redis_url="localhost:6379"):
     """ Run a work for python-rq
 
-    :param redis_url: Redis URI (redis://SOMETHING)
+    :param redis_url: Redis URI (redis://{redis_url})
     :type redis_url:None
     :return: Nothing
     """

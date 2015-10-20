@@ -25,15 +25,17 @@ class WorkerAPI(object):
     :param worker: Number of workers to use in HookTest
     :param redis: Redis Connection URL
     :param hooktest_path: Path where to clone the data
-    :param app:
-    :param name:
+    :param app: Application object
+    :param name: Name of the Blueprint
+
+    :ivar routes: Liste of tuples to store routes (url, function name, [Methods])
     """
     def __init__(self, prefix="/hook", secret="", worker=5, redis="127.0.0.1", hooktest_path="./", app=None, name=None):
         self.prefix = prefix
         self.secret = secret
         self.name = name
         self.hooktest_path = hooktest_path
-        self.redis = redis #  "redis://{0}".format(redis)
+        self.redis = redis
         self.worker = worker
 
         self.app = app
@@ -48,13 +50,14 @@ class WorkerAPI(object):
         ]
 
         if self.app is not None:
-            self.register_app(app)
+            self.init_app(app)
 
-    def register_app(self, app):
+    def init_app(self, app):
         """ Register the blueprint to the app
 
-        :param app:
-        :return:
+        :param app: Flask Application
+        :return: Blueprint for HookWorker registered in app
+        :rtype: Blueprint
         """
         self.blueprint = Blueprint(
             self.name,
@@ -95,9 +98,9 @@ class WorkerAPI(object):
             return False
 
     def r_submit(self):
-        """
+        """ Dispatch a test to the redis queue
 
-        :return:
+        :return: Response with a status and the job_id if everything worked
         """
         code, response = 401, {"status": "error"}
 
@@ -135,8 +138,8 @@ class WorkerAPI(object):
     def r_delete(self, id):
         """ Remove a test from the testing queue
 
-        :param id: Job id to canceel
-        :return:
+        :param id: Job id to cancel
+        :return: Json response with status and message
         """
         q = self.get_queue()
         job = q.fetch_job(id)
@@ -146,13 +149,13 @@ class WorkerAPI(object):
 
 
 def set_logging(level, name, path, logger):
-    """
+    """ Reroute logging of tornado into specified file with a RotatingFileHandler
 
-    :param level:
-    :param name:
-    :param path:
-    :param logger:
-    :return:
+    :param level: Level of logging
+    :type level: str
+    :param name: Name of logs file
+    :param path: Path where to store the logs file
+    :param logger: logging.logger object of Tonardo
     """
     log_level = getattr(logging, level.upper())
     handler = logging.handlers.RotatingFileHandler("{0}/{1}".format(path, name), maxBytes=3145728, encoding="utf-8", backupCount=5)
@@ -160,7 +163,17 @@ def set_logging(level, name, path, logger):
     logger.addHandler(handler)
 
 
-def run(secret="", domain="localhost", debug=False, port=5000, path="./hook.worker.api.log/", level="WARNING", git="./hooktest", worker=5):
+def run(secret="", debug=False, port=5000, path="./hook.worker.api.log/", level="WARNING", git="./hooktest", worker=5):
+    """ Set up a Tornado process around a flask app for quick run of the WorkerAPI Blueprint
+
+    :param secret: Salt to use in encrypting the body
+    :param debug: Set Flask App in debug Mode
+    :param port: Port to use for Flask App
+    :param path: Path where to store the logs
+    :param level: Level of Log
+    :param git: Pather where to clone the data
+    :param worker: Number of worker to use for HookTest runs
+    """
     app = Flask(__name__)
     app.debug = debug
     hook = WorkerAPI(prefix="/hooktest", secret=secret, worker=worker, hooktest_path=git, app=app)
