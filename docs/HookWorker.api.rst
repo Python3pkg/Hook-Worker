@@ -1,5 +1,5 @@
 HookWorker API
-=================================
+==============
 
 .. _HookWorker.api:
 
@@ -7,7 +7,6 @@ Rest API
 ########
 
 .. autoclass:: HookWorker.api.WorkerAPI
-
 .. automethod:: HookWorker.api.WorkerAPI.init_app
 
 Controller
