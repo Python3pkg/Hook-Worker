@@ -2,7 +2,9 @@
     :target: http://hook-worker.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
     
-    
+.. image:: https://badge.fury.io/py/HookWorker.svg
+    :target: https://badge.fury.io/py/HookWorker
+    :alt: Latest version
 
 Lightweight API to deploy on the machine distributing the test on a
 redis connection

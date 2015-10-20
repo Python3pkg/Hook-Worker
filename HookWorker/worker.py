@@ -11,7 +11,7 @@ def worker(redis_url="localhost:6379"):
 
     :param redis_url: Redis URI (redis://{redis_url})
     :type redis_url: str
-    
+
     """
     redis_url = "redis://{0}".format(redis_url)
     conn = redis.from_url(redis_url)
