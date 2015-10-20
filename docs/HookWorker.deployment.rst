@@ -44,7 +44,7 @@ Configuration of supervisor
 
 **DO NOT FORGET TO CHANGE THE PASSWORD**
 
-.. code:: ini
+.. code:: cfg
 
     [unix_http_server]
     file=/tmp/supervisor.sock       ; (the path to the socket file)
@@ -94,7 +94,7 @@ Services
 
 Add the following to your supervisor.conf
 
-.. code:: ini
+.. code:: cfg
 
     [program:hookworkerapi]
     command=hook-worker --api --path /home/capitains/logs/api/ --port 5002 --level INFO --secret YourSecret --git /home/capitains/hook  ; Do not forget to change the secret !

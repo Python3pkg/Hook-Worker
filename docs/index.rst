@@ -6,5 +6,7 @@ Welcome to the Hook Worker Documentation
 .. toctree::
     :maxdepth: 2
 
+    index
     HookWorker.api
     HookWorker.deployment
+

@@ -1,3 +1,9 @@
+.. image:: https://readthedocs.org/projects/hook-worker/badge/?version=latest
+    :target: http://hook-worker.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
+    
+    
+
 Lightweight API to deploy on the machine distributing the test on a
 redis connection
 

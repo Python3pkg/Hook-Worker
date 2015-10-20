@@ -19,7 +19,6 @@ from HookTest.test import cmd
 class WorkerAPI(object):
     """ Worker API for Capitains Hook
 
-
     :param prefix: Prefix for the WorkerAPI
     :param secret: Salt to use in encrypting the body
     :param worker: Number of workers to use in HookTest
