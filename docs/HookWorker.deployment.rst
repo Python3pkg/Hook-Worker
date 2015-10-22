@@ -97,11 +97,11 @@ Add the following to your supervisor.conf
 .. code:: cfg
 
     [program:hookworkerapi]
-    command=hook-worker --api --path /home/capitains/logs/api/ --port 5002 --level INFO --secret YourSecret --git /home/capitains/hook  ; Do not forget to change the secret !
+    command=hookworker-api --api --path /home/capitains/logs/api/ --port 5002 --level INFO --secret YourSecret --git /home/capitains/hook  ; Do not forget to change the secret !
     environment=PATH=/home/capitainshook/venv/bin
 
     [program:hookworkerrq]
-    command=hook-worker --worker --redis 127.0.0.1:6379
+    command=hookworker-api --rq --redis 127.0.0.1:6379
     environment=PATH=/home/capitainshook/venv/bin
     stdout_logfile=/home/capitains/logs/worker.log
     stderr_logfile=/home/capitains/logs/worker.error.log
