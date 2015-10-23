@@ -18,7 +18,7 @@ def cmd():
     parser.add_argument("-o", "--path", help="Path to use for storing logs", default="./hook.worker.api.log")
     parser.add_argument('-e', "--level", help='Level of logging', default="WARNING")
     parser.add_argument("-i", "--git", help="Git Folder for clone resources", default="./hooktest")
-    parser.add_argument("-w", "--worker", help="Worker to use for HookTest", default=10, type=int)
+    parser.add_argument("-w", "--workers", help="Worker to use for HookTest", default=10, type=int)
 
     parser.add_argument('-r', "--redis", help="Redis address", default="127.0.0.1:6379")
     parser.add_argument("-q", "--rq", help="Run the worker with the API", action="store_true")

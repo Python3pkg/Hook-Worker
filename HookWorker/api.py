@@ -21,7 +21,7 @@ class WorkerAPI(object):
 
     :param prefix: Prefix for the WorkerAPI
     :param secret: Salt to use in encrypting the body
-    :param worker: Number of workers to use in HookTest
+    :param workers: Number of workers to use in HookTest
     :param redis: Redis Connection URL
     :param hooktest_path: Path where to clone the data
     :param app: Application object
@@ -29,13 +29,13 @@ class WorkerAPI(object):
 
     :ivar routes: Liste of tuples to store routes (url, function name, [Methods])
     """
-    def __init__(self, prefix="/hook", secret="", worker=5, redis="127.0.0.1", hooktest_path="./", app=None, name=None):
+    def __init__(self, prefix="/hook", secret="", workers=5, redis="127.0.0.1", hooktest_path="./", app=None, name=None):
         self.prefix = prefix
         self.secret = secret
         self.name = name
         self.hooktest_path = hooktest_path
         self.redis = redis
-        self.worker = worker
+        self.workers = workers
 
         self.app = app
         self.blueprint = None
@@ -162,7 +162,7 @@ def set_logging(level, name, path, logger):
     logger.addHandler(handler)
 
 
-def run(secret="", debug=False, port=5000, path="./hook.worker.api.log/", level="WARNING", git="./hooktest", worker=5):
+def run(secret="", debug=False, port=5000, path="./hook.worker.api.log/", level="WARNING", git="./hooktest", workers=5):
     """ Set up a Tornado process around a flask app for quick run of the WorkerAPI Blueprint
 
     :param secret: Salt to use in encrypting the body
@@ -171,11 +171,11 @@ def run(secret="", debug=False, port=5000, path="./hook.worker.api.log/", level=
     :param path: Path where to store the logs
     :param level: Level of Log
     :param git: Pather where to clone the data
-    :param worker: Number of worker to use for HookTest runs
+    :param workers: Number of worker to use for HookTest runs
     """
     app = Flask(__name__)
     app.debug = debug
-    hook = WorkerAPI(prefix="/hooktest", secret=secret, worker=worker, hooktest_path=git, app=app)
+    hook = WorkerAPI(prefix="/hooktest", secret=secret, workers=workers, hooktest_path=git, app=app)
 
     http_server = HTTPServer(WSGIContainer(app))
     http_server.bind(port)
