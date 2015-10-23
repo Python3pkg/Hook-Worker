@@ -110,7 +110,7 @@ class WorkerAPI(object):
             data.update({
                 "secret": self.secret,
                 "path": self.hooktest_path,
-                "workers": self.worker
+                "workers": self.workers
             })
 
             q = self.get_queue()
