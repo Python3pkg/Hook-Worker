@@ -10,7 +10,7 @@ setup(
     author_email='leponteineptique@gmail.com',
     description='Lightweight API to handle call and distribute them over a redis server',
     install_requires=[
-        "HookTest==0.0.3",
+        "HookTest==0.0.4",
         "Flask==0.10.1",
         "rq==0.5.5",
         "redis>=2.7.0",
