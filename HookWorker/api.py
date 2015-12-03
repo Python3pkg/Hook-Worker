@@ -132,7 +132,7 @@ class WorkerAPI(object):
         :return: Queue of Redis
         """
         redis_conn = Redis(self.redis)
-        return Queue(connection=redis_conn)
+        return Queue("hook", connection=redis_conn)
 
     def r_delete(self, id):
         """ Remove a test from the testing queue

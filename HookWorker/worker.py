@@ -17,7 +17,7 @@ def worker(redis_url="localhost:6379"):
     conn = redis.from_url(redis_url)
 
     with Connection(conn):
-        qs = [Queue()]
+        qs = [Queue("hook")]
 
         w = Worker(qs)
         w.work()
