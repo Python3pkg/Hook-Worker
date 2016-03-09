@@ -26,6 +26,14 @@ Python and Python tools
 
    -  ``pip3 install virtualenv``
 
+- Install development dependencies
+   - ``sudo apt-get install python-dev libxml2-dev libxslt-dev``
+
+Redis
+******
+
+- `Install Redis <http://redis.io/topics/quickstart>`__
+
 Supervisor
 **********
 
@@ -92,16 +100,19 @@ from many security flaws :
 Services
 ********
 
-Add the following to your supervisor.conf
+Add the following to your supervisord.conf
+
+The secret should be set to the secret key used by authorized callers of the HookWorker API
 
 .. code:: cfg
 
     [program:hookworkerapi]
-    command=/home/capitainshook/venv/bin/hookworker-api --api --path /home/capitains/logs/api/ --port 5002 --level INFO --secret YourSecret --git /home/capitains/hook --workers 7; Do not forget to change the secret !
+    command=/home/capitainshook/venv/bin/hookworker-api --api --path /home/capitainshook/logs/api/ --port 5002 --level INFO --secret YourSecret --git /home/capitainshook/git --workers 7; Do not forget to change the secret !
+    stderr_logfile=/home/capitainshook/logs/api.error.log
 
 
     [program:hookworkerrq]
     command=/home/capitainshook/venv/bin/hookworker-api --rq --redis 127.0.0.1:6379
-    stdout_logfile=/home/capitains/logs/worker.log
-    stderr_logfile=/home/capitains/logs/worker.error.log
+    stdout_logfile=/home/capitainshook/logs/worker.log
+    stderr_logfile=/home/capitainshook/logs/worker.error.log
 
