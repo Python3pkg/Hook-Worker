@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='HookWorker',
-    version='0.0.4',
+    version='0.0.5',
     packages=find_packages(exclude=("./tests", "__pycache__")),
     url='https://github.com/Capitains/Hook-Worker',
     license='GNU GPL',
