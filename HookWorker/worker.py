@@ -6,6 +6,7 @@ import redis
 # Preload libraries
 import HookTest.test
 
+
 def worker(redis_url="localhost:6379"):
     """ Run a work for python-rq
 
